@@ -4,7 +4,7 @@ from tools import handle_tool_calls, record_user_details, unknown_user_details
 from styles import CSS, JS, EXAMPLES
 from dotenv import load_dotenv
 import gradio as gr
-#from agent import twin_agent
+from agent import twin_agent
 import asyncio
 from agents import Agent, SQLiteSession, Runner
 
@@ -18,7 +18,7 @@ system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
 
 tools = [record_user_details, unknown_user_details]
 
-
+# chat for non-agent
 def chat(message, history):
     messages = system + history + [{"role": "user", "content": message}]
     response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
@@ -31,13 +31,8 @@ def chat(message, history):
         response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     return response.choices[0].message.content
 
-twin_agent = Agent(
-    name="Digital Twin",
-    instructions=TWIN_SYSTEM_PROMPT,
-    model=MODEL_NAME,
-    tools=tools,
-)
 
+# chat for agent
 async def chat_agent(message, history):
     session = SQLiteSession("twin_chat")
     result = await Runner.run(twin_agent, message, session=session)
