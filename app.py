@@ -1,9 +1,12 @@
 from openai import OpenAI
 from context import TWIN_SYSTEM_PROMPT
-from tools import tools, handle_tool_calls
+from tools import handle_tool_calls, record_user_details, unknown_user_details
 from styles import CSS, JS, EXAMPLES
 from dotenv import load_dotenv
 import gradio as gr
+#from agent import twin_agent
+import asyncio
+from agents import Agent, SQLiteSession, Runner
 
 load_dotenv(override=True)
 
@@ -12,6 +15,8 @@ MODEL_NAME = "gpt-5.4-mini"
 openai = OpenAI()
 
 system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
+
+tools = [record_user_details, unknown_user_details]
 
 
 def chat(message, history):
@@ -26,10 +31,28 @@ def chat(message, history):
         response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     return response.choices[0].message.content
 
+twin_agent = Agent(
+    name="Digital Twin",
+    instructions=TWIN_SYSTEM_PROMPT,
+    model=MODEL_NAME,
+    tools=tools,
+)
+
+async def chat_agent(message, history):
+    session = SQLiteSession("twin_chat")
+    result = await Runner.run(twin_agent, message, session=session)
+    return result.final_output
+
+
+async def main():
+    result = await twin_agent()
+    print(result)
 
 if __name__ == "__main__":
+    #asyncio.run(main())
+
     gr.ChatInterface(
-        chat,
+        chat_agent,
         examples=EXAMPLES,
         title="Digital Twin",
         description="Talk to my AI twin about my career",

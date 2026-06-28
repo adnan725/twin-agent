@@ -2,6 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 import requests
+from agents import Agent, Runner, trace, function_tool, SQLiteSession
 
 load_dotenv(override=True)
 
@@ -19,17 +20,22 @@ def send_pushover_message(message):
         },
     )
 
-
-def record_user_details(email, name='Name not provided', notes='notes not provided'):
+@function_tool
+def record_user_details(email: str, name: str = 'Name not provided', notes: str = 'notes not provided') -> str:
+    """Use this tool to record that a user is interested in being in touch and provided an email address"""
 
     send_pushover_message(f"Recording interest from {name} with email {email} and notes {notes}")
     return 'OK'
 
-def unknown_user_details(question):
+@function_tool
+def unknown_user_details(question: str) -> str:
+    """Use this tool to record any question that couldn't be answered as you didn't know the answer"""
+
     send_pushover_message(f"Recording {question} asked that I couldn't answer")
     return 'OK'
 
 
+# json schema for the tools
 record_user_details_json = {
     "name": "record_user_details",
     "description": "Use this tool to record that a user is interested in being in touch and provided an email address",
