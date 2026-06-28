@@ -1,0 +1,24 @@
+Adnan Ali is a Full-Stack AI Developer and Software Engineer based in the Krefeld/Düsseldorf area of North Rhine-Westphalia, Germany. He has over three years of professional experience building scalable, production-grade applications, combining solid software engineering practices (modular architecture, APIs, CI/CD) with modern AI — particularly RAG architectures, LLM applications, AI agents, and semantic search.
+Current Role & Experience
+He currently works as a Fullstack Developer Consultant at CGI Deutschland (since November 2022), where he builds enterprise-grade React/TypeScript frontends and AI-powered applications for clients in regulated industries including manufacturing, healthcare, energy, and the public sector. His work spans the full delivery cycle — architecture, component design, API integration, performance tuning, and cloud deployment via Azure DevOps.
+Before CGI, he worked as a Frontend Developer at Asappz GmbH in Aachen (February–October 2022), where he built a library of 20+ reusable React components in Storybook (cutting design-to-implementation time by ~40%) for a data-intensive real estate platform.
+Key Projects
+
+AccessibilityGate — An AI-powered, real-time sign language ↔ text/voice translation platform enabling communication between deaf/mute and hearing users in public-service settings. Uses computer vision, NLP, LLM-based translation, an agentic workflow, and RAG techniques. Supports 50+ concurrent sessions with sub-2-second latency. Stack: React, TypeScript, Flask, LangChain, RAG, MCP, OpenAI, Docker, Kubernetes.
+Tellus — A scalable React/Redux frontend for an Industrial IoT platform for real-time monitoring and remote control of industrial machines across multiple factory sites, contributing to reduced machine downtime. Stack: React, Redux, Kafka, Material UI, Docker, Azure DevOps.
+UNFCCC Climate Treaty Platform — A secure document collaboration tool serving 195+ UN member nation delegations. Implemented MSAL OAuth 2.0/OpenID Connect flows with silent token renewal and integrated Microsoft Graph API for dynamic Azure AD group and SharePoint permission resolution. Stack: React, Node.js, Microsoft Graph API, MSAL, Docker.
+
+Technical Skills
+
+Generative AI & LLMs: LangChain, OpenAI, Claude, Hugging Face, LLM fine-tuning, MCP, Prompt Engineering, Context Engineering
+RAG & Retrieval: RAG systems, embeddings, semantic search, vector databases (Chroma)
+Frontend: React.js, Redux, TypeScript, JavaScript (ES6+), HTML5, CSS3, SCSS/Sass, responsive design
+Backend & APIs: Node.js, Flask (Python), RESTful APIs, Microsoft Graph API, MSAL, microservices
+DevOps & Cloud: Docker, Kubernetes, CI/CD pipelines, Azure DevOps, AWS, Git
+
+Education & Certifications
+He holds a Bachelor of Science in Mechanical Engineering from COMSATS Institute of Information and Technology (2014–2018). His certifications include AWS Certified Cloud Practitioner, AWS Certified Developer – Associate; Docker, Kubernetes & Azure DevOps; React & JavaScript Algorithms; Introduction to Model Context Protocol (Anthropic); Context Engineering for Developers; and GraphRAG Essential Training.
+Languages
+German (C1, professional working proficiency), English (C2, fluent), and Urdu (native).
+Career Interests
+Adnan is open to senior frontend and AI-integrated web application roles in Germany. He's passionate about integrating LLMs and RAG pipelines into web apps that solve real-world problems, and is keen to connect and collaborate on meaningful projects.
