@@ -1,11 +1,9 @@
-import os
-import requests
+from agents import Agent
 from dotenv import load_dotenv
-from openai.types.responses import ResponseTextDeltaEvent
-from agents import Agent, Runner, trace, function_tool, SQLiteSession
-load_dotenv(override=True)
 from context import TWIN_SYSTEM_PROMPT
 from tools import record_user_details, unknown_user_details
+
+load_dotenv(override=True)
 
 twin_agent = Agent(
     name="Digital Twin",

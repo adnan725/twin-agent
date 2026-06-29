@@ -1,8 +1,8 @@
 import os
 import json
-from dotenv import load_dotenv
 import requests
-from agents import Agent, Runner, trace, function_tool, SQLiteSession
+from dotenv import load_dotenv
+from agents import function_tool
 
 load_dotenv(override=True)
 
