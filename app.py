@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import gradio as gr
 from agent import twin_agent
 import asyncio
-from agents import Agent, SQLiteSession, Runner
+from agents import Agent, SQLiteSession, Runner, trace
 
 load_dotenv(override=True)
 
@@ -35,7 +35,8 @@ def chat(message, history):
 # chat for agent
 async def chat_agent(message, history):
     session = SQLiteSession("twin_chat")
-    result = await Runner.run(twin_agent, message, session=session)
+    with trace("twin_agent"):
+        result = await Runner.run(twin_agent, message, session=session)
     return result.final_output
 
 
