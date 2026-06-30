@@ -3,12 +3,48 @@ import json
 import requests
 from dotenv import load_dotenv
 from agents import function_tool
+from email.message import EmailMessage
+import smtplib
+from agents import function_tool
 
 load_dotenv(override=True)
 
 pushover_user = os.getenv("PUSHOVER_USER")
 pushover_token = os.getenv("PUSHOVER_TOKEN")
 pushover_url = "https://api.pushover.net/1/messages.json"
+
+MODEL_NAME = os.getenv("MODEL_NAME")
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_SMTP_SERVER = os.getenv("EMAIL_SMTP_SERVER")
+EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
+
+USE_EMAIL = EMAIL_ADDRESS and EMAIL_SMTP_SERVER and EMAIL_APP_PASSWORD
+
+def send_email(subject, text_body, html_body):
+    msg = EmailMessage()
+    msg["from"] = EMAIL_ADDRESS
+    msg["to"] = EMAIL_ADDRESS
+    msg["subject"] = subject
+    msg.set_content(text_body)
+    msg.add_alternative(html_body, subtype="html")
+
+    with smtplib.SMTP(EMAIL_SMTP_SERVER, 587) as server:
+        server.starttls()
+        server.login(EMAIL_ADDRESS, EMAIL_APP_PASSWORD)
+        server.send_message(msg)
+
+@function_tool
+def send_email_tool(subject: str, text_body: str, html_body: str) -> str:
+    """
+    Send out an email with the given subject and body to all sales prospects
+    
+    Args:
+        subject: The subject of the email
+        text_body: The body of the email as plain text
+        html_body: The HTML body of the email
+    """
+    send_email(subject, text_body, html_body)
+    return "Email Sent"
 
 def send_pushover_message(message):
     requests.post(
